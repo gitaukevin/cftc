@@ -1396,7 +1396,7 @@ def main():
     # Tab 1: Leveraged Funds
     with tab1:
         st.markdown("## Leveraged Funds (Hedge Funds, CTAs, Large Speculators)")
-        st.markdown("Data source: `Leverage.xlsx`")
+        st.markdown("Data source: `FinFutYY.xls`")
         
         with st.spinner("Loading Leveraged Funds data..."):
             df_leverage = load_leverage_data()
