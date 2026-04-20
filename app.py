@@ -307,7 +307,9 @@ st.markdown("""
 # ============================================================================
 
 # Base directory
-base_directory = r'C:\Users\gitau\OneDrive\Institutions'
+#base_directory = r'C:\Users\gitau\OneDrive\Institutions'
+import os
+base_directory = os.path.dirname(os.path.abspath(__file__))
 
 # Leveraged Funds file
 leverage_file = os.path.join(base_directory, 'FinFutYY.xls')
