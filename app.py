@@ -1,4 +1,44 @@
 import streamlit as st
+import hmac
+
+# Password protection
+def check_password():
+    """Returns True if the user has the correct password."""
+    
+    def password_entered():
+        """Checks whether the password entered is correct."""
+        if hmac.compare_digest(
+            st.session_state["password"], 
+            st.secrets["PASSWORD"]
+        ):
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Don't store the password
+        else:
+            st.session_state["password_correct"] = False
+    
+    # Return True if the password is already validated
+    if st.session_state.get("password_correct", False):
+        return True
+    
+    # Show password input
+    st.text_input(
+        "🔐 Enter Password to Access Dashboard",
+        type="password",
+        on_change=password_entered,
+        key="password"
+    )
+    
+    if "password_correct" in st.session_state:
+        st.error("😕 Password incorrect. Please try again.")
+    
+    return False
+
+# Check password before showing anything else
+if not check_password():
+    st.stop()  # Stop execution if password is wrong
+    
+
+import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
